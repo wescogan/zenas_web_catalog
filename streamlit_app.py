@@ -9,7 +9,8 @@ st.title("Zena's Amazing Athleisure Catalog")
 
 conn = st.connection("snowflake")
 session = conn.session()
-table = session.table("ZENAS_ATHLEISURE_DB.PRODUCTS.catalog_for_website").select(col('COLOR_OR_STYLE'))
+table = session.table("ZENAS_ATHLEISURE_DB.PRODUCTS.catalog_for_website")
+table_color_or_style = table.select(col('COLOR_OR_STYLE'))
 my_dataframe = table
 # st.dataframe(data=my_dataframe, use_container_width=True)
 # st.stop()

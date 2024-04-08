@@ -9,8 +9,7 @@ st.title("Zena's Amazing Athleisure Catalog")
 
 conn = st.connection("snowflake")
 session = conn.session()
-table = session.table("ZENAS_ATHLEISURE_DB.PRODUCTS.catalog_for_website")
-table_color_or_style = table.select(col('COLOR_OR_STYLE'))
+table = session.table("ZENAS_ATHLEISURE_DB.PRODUCTS.catalog_for_website").select(col('COLOR_OR_STYLE'))
 my_dataframe = table
 # st.dataframe(data=my_dataframe, use_container_width=True)
 # st.stop()
@@ -26,10 +25,13 @@ color_or_style = st.selectbox(
 
 caption = 'Our warm, ' + color_or_style + ' sweatsuit!'
 
-if color_or_style:
-    row = pd_df.loc[pd_df['COLOR_OR_STYLE'] == color_or_style].iloc[0]
-    st.write(row)
-    #st.image(row.)
-    #st.write(ingredients_list)
-    #st.text(ingredients_list)
-        
+row = pd_df.loc[pd_df['COLOR_OR_STYLE'] == color_or_style].iloc[0]
+st.write(row)
+
+st.image(row.DIRECT_URL, caption)
+
+st.write('Price:', row.PRICE)
+
+st.write('Sizes Available:', row.SIZES_LIST)
+
+st.write(ow.UPSELL_PRODUCT_DESC)

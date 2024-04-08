@@ -14,8 +14,8 @@ session = conn.session()
 #my_dataframe = table
 # st.dataframe(data=my_dataframe, use_container_width=True)
 # st.stop()
-conn.execute("select color_or_style from catalog_for_website")
-table_color_or_style = conn.fetchall()
+df = conn.query("select color_or_style from catalog_for_website;", ttl=600)
+table_color_or_style = df
 
 # Convert Snowpark Dataframe to Pandas Dataframe so we can use LOC function
 # pd_df = my_dataframe.to_pandas()
@@ -27,9 +27,8 @@ color_or_style = st.selectbox(
 )
 
 #row = pd_df.loc[pd_df['COLOR_OR_STYLE'] == color_or_style].iloc[0]
-conn.execute("select direct_url, price, size_list, upsell_product_desc from catalog_for_website where color_or_style = '" + option + "';")
-row = conn.fetchone()
-
+find_row = conn.query("select direct_url, price, size_list, upsell_product_desc from catalog_for_website where color_or_style = '" + option + "';")
+row = find_row[0]
 # st.write(row)
 
 caption = 'Our warm, ' + color_or_style + ' sweatsuit!'

@@ -14,20 +14,22 @@ conn = st.connection("snowflake")
 session = conn.session()
 my_dataframe = session.table("ZENAS_ATHLEISURE_DB.PRODUCTS.catalog_for_website").select(col('color_or_style'))
 st.dataframe(data=my_dataframe, use_container_width=True)
-st.stop()
+# st.stop()
 
 # Convert Snowpark Dataframe to Pandas Dataframe so we can use LOC function
 pd_df = my_dataframe.to_pandas()
-# st.dataframe(pd_df)
-# st.stop()
+st.dataframe(pd_df)
+st.stop()
 
-ingredients_list = st.multiselect(
-    'Choose up to 5 ingredients'
+color_or_style = st.selectbox(
+    'Pick a sweatsuit color or style'
     , my_dataframe
-    , max_selections=5
 )
 
-if ingredients_list:
+caption = 'Our warm, ' + color_or_style + ' sweatsuit!'
+
+if color_or_style:
+    st.image(
     #st.write(ingredients_list)
     #st.text(ingredients_list)
 

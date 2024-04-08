@@ -10,7 +10,8 @@ st.title("Zena's Amazing Athleisure Catalog")
 conn = st.connection("snowflake")
 session = conn.session()
 table = session.table("ZENAS_ATHLEISURE_DB.PRODUCTS.catalog_for_website")
-my_dataframe = table# .select(col('color_or_style'))
+table_color_or_style = table.select(col('color_or_style'))
+my_dataframe = table
 # st.dataframe(data=my_dataframe, use_container_width=True)
 # st.stop()
 
@@ -20,7 +21,7 @@ st.dataframe(pd_df)
 
 color_or_style = st.selectbox(
     'Pick a sweatsuit color or style'
-    , my_dataframe.select(col('color_or_style'))
+    , table_color_or_style
 )
 
 caption = 'Our warm, ' + color_or_style + ' sweatsuit!'

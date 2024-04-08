@@ -31,4 +31,4 @@ caption = 'Our warm, ' + color_or_style + ' sweatsuit!'
 st.image(row.DIRECT_URL, caption)
 st.write('Price:', row.PRICE)
 st.write('Sizes Available:', row.SIZE_LIST)
-st.write(ow.UPSELL_PRODUCT_DESC)
+st.write(row.UPSELL_PRODUCT_DESC)

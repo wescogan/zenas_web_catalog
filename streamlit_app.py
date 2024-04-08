@@ -9,14 +9,16 @@ st.title("Zena's Amazing Athleisure Catalog")
 
 conn = st.connection("snowflake")
 session = conn.session()
-table = session.table("ZENAS_ATHLEISURE_DB.PRODUCTS.catalog_for_website")
-table_color_or_style = table.select(col('COLOR_OR_STYLE'))
-my_dataframe = table
+#table = session.table("ZENAS_ATHLEISURE_DB.PRODUCTS.catalog_for_website")
+#table_color_or_style = table.select(col('COLOR_OR_STYLE'))
+#my_dataframe = table
 # st.dataframe(data=my_dataframe, use_container_width=True)
 # st.stop()
+session.execute("select color_or_style from catalog_for_website")
+table_color_or_style = session.fetchall()
 
 # Convert Snowpark Dataframe to Pandas Dataframe so we can use LOC function
-pd_df = my_dataframe.to_pandas()
+# pd_df = my_dataframe.to_pandas()
 # st.dataframe(pd_df)
 
 color_or_style = st.selectbox(
@@ -24,7 +26,11 @@ color_or_style = st.selectbox(
     , table_color_or_style
 )
 
-row = pd_df.loc[pd_df['COLOR_OR_STYLE'] == color_or_style].iloc[0]
+#row = pd_df.loc[pd_df['COLOR_OR_STYLE'] == color_or_style].iloc[0]
+session.execute("select direct_url, price, size_list, upsell_product_desc from catalog_for_website where
+color_or_style = '" + option + "';")
+row = session.fetchone()
+
 # st.write(row)
 
 caption = 'Our warm, ' + color_or_style + ' sweatsuit!'

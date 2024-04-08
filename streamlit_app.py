@@ -31,7 +31,7 @@ row = conn.query("select direct_url, price, size_list, upsell_product_desc from 
 st.write('row:', row)
 
 caption = 'Our warm, ' + color_or_style + ' sweatsuit!'
-st.image(row['DIRECT_URL'], caption)
-st.write('Price:', row['PRICE'])
-st.write('Sizes Available:', row['SIZE_LIST'])
-st.write(row['UPSELL_PRODUCT_DESC'])
+st.image(row.loc['DIRECT_URL'], caption)
+st.write('Price:', row.loc['PRICE'])
+st.write('Sizes Available:', row.loc['SIZE_LIST'])
+st.write(row.loc['UPSELL_PRODUCT_DESC'])

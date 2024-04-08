@@ -12,7 +12,8 @@ st.write('The name on your smoothie will be:', name_on_order)
 
 conn = st.connection("snowflake")
 session = conn.session()
-my_dataframe = session.table("ZENAS_ATHLEISURE_DB.PRODUCTS.catalog_for_website").select(col('color_or_style'))
+table = session.table("ZENAS_ATHLEISURE_DB.PRODUCTS.catalog_for_website")
+my_dataframe = table.select()# .select(col('color_or_style'))
 st.dataframe(data=my_dataframe, use_container_width=True)
 # st.stop()
 

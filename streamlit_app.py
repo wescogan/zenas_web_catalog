@@ -28,8 +28,9 @@ color_or_style = st.selectbox(
 
 #row = pd_df.loc[pd_df['COLOR_OR_STYLE'] == color_or_style].iloc[0]
 find_row = conn.query("select direct_url, price, size_list, upsell_product_desc from catalog_for_website where color_or_style = '" + color_or_style + "';")
+st.write('find_row:', find_row)
 row = find_row[0]
-# st.write(row)
+st.write('row:', row)
 
 caption = 'Our warm, ' + color_or_style + ' sweatsuit!'
 st.image(row.DIRECT_URL, caption)

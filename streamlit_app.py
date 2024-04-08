@@ -20,7 +20,6 @@ st.dataframe(data=my_dataframe, use_container_width=True)
 # Convert Snowpark Dataframe to Pandas Dataframe so we can use LOC function
 pd_df = my_dataframe.to_pandas()
 st.dataframe(pd_df)
-st.stop()
 
 color_or_style = st.selectbox(
     'Pick a sweatsuit color or style'
@@ -31,7 +30,7 @@ caption = 'Our warm, ' + color_or_style + ' sweatsuit!'
 
 if color_or_style:
     row = pd_df.loc[pd_df['color_or_style'] == color_or_style].iloc[0]
-    st.write(row);
+    st.write(row)
     #st.image(row.)
     #st.write(ingredients_list)
     #st.text(ingredients_list)

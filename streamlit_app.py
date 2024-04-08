@@ -17,22 +17,18 @@ my_dataframe = table
 
 # Convert Snowpark Dataframe to Pandas Dataframe so we can use LOC function
 pd_df = my_dataframe.to_pandas()
-st.dataframe(pd_df)
+# st.dataframe(pd_df)
 
 color_or_style = st.selectbox(
     'Pick a sweatsuit color or style'
     , table_color_or_style
 )
 
-caption = 'Our warm, ' + color_or_style + ' sweatsuit!'
-
 row = pd_df.loc[pd_df['COLOR_OR_STYLE'] == color_or_style].iloc[0]
-st.write(row)
+# st.write(row)
 
+caption = 'Our warm, ' + color_or_style + ' sweatsuit!'
 st.image(row.DIRECT_URL, caption)
-
 st.write('Price:', row.PRICE)
-
-st.write('Sizes Available:', row.SIZES_LIST)
-
+st.write('Sizes Available:', row.SIZE_LIST)
 st.write(ow.UPSELL_PRODUCT_DESC)
